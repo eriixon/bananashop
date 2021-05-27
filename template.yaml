@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  banana
+
+  Sample SAM Template for banana
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  BananaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bananabox/
+      Handler: app.lambdaHandler
+      Runtime: nodejs14.x
+      Events:
+        GiveBanana:
+          Type: Api
+          Properties:
+            Path: /bananas/{id}
+            Method: get
+        TakeBanana:
+          Type: Api
+          Properties:
+            Path: /bananas
+            Method: post
